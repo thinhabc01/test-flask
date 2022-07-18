@@ -10,7 +10,7 @@ import pytesseract
 
 app = Flask(__name__)
 pytesseract.pytesseract.tesseract_cmd = "/app/.apt/usr/bin/tesseract"
-
+server = app.server
 @app.route('/')
 def homepage():
 	return """
