@@ -1,23 +1,21 @@
 from flask import *
 from datetime import datetime
-from opt import TOTP
 
 import os
 import platform
 
+import numpy as np
+import cv2
+import pytesseract
 
 app = Flask(__name__)
+pytesseract.pytesseract.tesseract_cmd = "/app/.apt/usr/bin/tesseract"
 
 @app.route('/')
 def homepage():
-	the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
-
 	return """
-	    <h1>Hello heroku</h1>
-	    <p>It is currently {time}.</p>
-
-	    <img src="http://loremflickr.com/600/400" />
-	    """.format(time=the_time)
+	    <h1>OK</h1>
+	    """
 #===========================download file================================
 @app.route('/return-files/')
 def return_files_tut():
@@ -40,32 +38,7 @@ def success():
 		f.save(f.filename)  
 		return render_template("success.html", name = f.filename)  
 
-#=================================get totp===============================
-@app.route('/otp', methods=['GET'] )
-def otp():
-	code = str(request.args.get('code'))
-	totp = TOTP(code)
-	return totp.now()
-
-@app.route("/getip", methods=["GET"])
-def get_my_ip():
-    return request.environ['REMOTE_ADDR']
-
-#===============================chat=====================================
-@app.route('/chat')  
-def chat():
-	with open('dem.txt','r') as f:
-    		line = f.read()
-		
-	d = str(int(line) +1)
-	
-	with open('dem.txt','w') as f:
-    		line = f.write(d)
-		
-	return d 
-#========================================================================
-
-
+#=======================================================================
 
 @app.route('/getinfo')
 def getinfo():
