@@ -2,4 +2,3 @@ Flask
 gunicorn
 pytesseract
 opencv-python
-opencv-python-headless==4.3.0.38
