@@ -24,7 +24,9 @@ def return_files_tut():
 	except Exception as e:
 		return str(e)
 	
-
+@app.route('/test', methods = ['POST'])  
+def test():
+	return render_template("test.html") 
 	
 #========================upload file=====================================
 @app.route('/upload')  
